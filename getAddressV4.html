@@ -1,0 +1,23 @@
+<div id="wrap" style="width:100%">
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+
+    var element_wrap = document.getElementById('wrap');
+
+    new daum.Postcode({
+        oncomplete: function(data) {
+            if(data.userSelectedType=="R"){
+                // userSelectedType : �˻� �������� �����ڰ� ������ �ּ��� Ÿ��
+                // return type : R - roadAddress, J : jibunAddress
+                // TestApp �� �ȵ����̵忡�� ������ �̸�
+                window.FirebasedbStore.setAddress(data.address, data.roadAddress, data.buildingName);
+            }
+            else{
+                window.FirebasedbStore.setAddress(data.address, data.jibunAddress, data.buildingName);
+            }
+        }
+    }).embed(element_wrap);
+</script>
+
+</div>
